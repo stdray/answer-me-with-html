@@ -3,7 +3,7 @@ import { esc } from '../svg/text.js';
 // `hints.span` is the span the author wrote; it becomes data-span for the layout script. The inline grid styles come from `panel.attrs`
 // (which may include spans added by the server) and are only the fallback without JavaScript. `rows` is not a hint for the layout
 // script: it only shapes the plain grid.
-export function panelHtml(panel, { cols = 3, grid = true, hints = {} } = {}) {
+export function panelHtml(panel, { cols = 3, grid = true, hints = {}, openLabel = '' } = {}) {
   const { attrs } = panel;
   const span = Math.min(Number(attrs.span) || 1, cols);
   const rows = Number(attrs.rows) || 1;
@@ -16,9 +16,14 @@ export function panelHtml(panel, { cols = 3, grid = true, hints = {} } = {}) {
   const data = grid && hinted >= 1 ? ` data-span="${Math.min(hinted, cols)}"` : '';
   const cls = `${span > 1 ? ' am-span-wide' : ''}${attrs.bare ? ' am-panel--bare' : ''}`;
   const meta = attrs.meta ? `<span class="am-panel-meta">${esc(attrs.meta)}</span>` : '';
+  // A panel that carries a diagram gets a button handing it to a new tab at
+  // natural size — the in-page copy is capped by the column width.
+  const openBtn = !attrs.bare && openLabel && panel.html.includes('am-diagram')
+    ? `<button type="button" class="am-diagram-open" title="${esc(openLabel)}">${esc(openLabel)}</button>`
+    : '';
   const head = attrs.bare
     ? ''
-    : `<header class="am-panel-head"><span class="am-panel-id">${esc(panel.id)}</span><h2>${esc(panel.title)}</h2>${meta}</header>\n`;
+    : `<header class="am-panel-head"><span class="am-panel-id">${esc(panel.id)}</span><h2>${esc(panel.title)}</h2>${openBtn}${meta}</header>\n`;
   return `<section class="am-panel${cls}" id="panel-${esc(panel.id)}"${style}${data}>
 ${head}<div class="am-panel-body">${panel.html}</div>
 </section>`;

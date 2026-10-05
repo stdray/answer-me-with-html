@@ -10,7 +10,11 @@ code, pre, kbd { font-family: var(--font-mono); }
 
 /* ── Toolbar ─────────────────────────────── */
 .am-toolbar {
-  position: fixed; top: 12px; right: 12px; z-index: 10; display: flex; gap: 6px;
+  /* In the document flow and right-aligned: the buttons neither float over the
+     content nor ride along on scroll. width: fit-content is what lets
+     margin-left: auto push the bar to the right edge — a block with width:auto
+     already fills the row, so the auto margin would be a no-op without it. */
+  position: static; width: fit-content; margin-left: auto; display: flex; gap: 6px;
 }
 .am-btn {
   font: 12px/1 var(--font-sans); color: var(--ink); background: var(--paper);
@@ -18,6 +22,14 @@ code, pre, kbd { font-family: var(--font-mono); }
 }
 .am-btn:hover { border-color: var(--ink-3); }
 .am-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Per-panel button that hands the diagram to a new tab at natural size. */
+.am-panel-head .am-diagram-open {
+  align-self: center; margin-right: 10px; white-space: nowrap;
+  font: 12px/1 var(--font-sans); color: var(--ink); background: var(--paper);
+  border: 1px solid var(--line-2); border-radius: var(--radius);
+  padding: 6px 9px; cursor: pointer;
+}
+.am-panel-head .am-diagram-open:hover { border-color: var(--ink-3); }
 /* Theme and mode lists: a label and a native select inside one button-like box */
 .am-pick {
   display: flex; align-items: center; gap: 6px; font: 12px/1 var(--font-sans); color: var(--ink-2); background: var(--paper);

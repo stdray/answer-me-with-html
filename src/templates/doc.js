@@ -11,7 +11,7 @@ export function doc({ meta, introHtml, panels, ui }) {
 ${headHtml(meta, introHtml)}
 <div class="am-doc-layout${withToc ? '' : ' am-doc-layout--notoc'}">
 ${toc}<div class="am-doc-body">
-${panels.map((p) => panelHtml(p, { grid: false })).join('\n')}
+${panels.map((p) => panelHtml(p, { grid: false, openLabel: ui?.open ?? '' })).join('\n')}
 </div>
 </div>
 </main>`;

@@ -34,19 +34,19 @@ export const UI = {
   zh: {
     theme: '主题', modeLabel: '明暗',
     mode: { auto: '跟随系统', light: '亮', dark: '暗' },
-    copy: '复制源稿', done: '已复制 ✓',
+    copy: '复制源稿', done: '已复制 ✓', open: '新窗口打开',
     toc: '目录', flow: '流程图', sequence: '时序图', colon: '：', sep: '、',
   },
   en: {
     theme: 'Theme', modeLabel: 'Mode',
     mode: { auto: 'Auto', light: 'Light', dark: 'Dark' },
-    copy: 'Copy source', done: 'Copied ✓',
+    copy: 'Copy source', done: 'Copied ✓', open: 'Open in new tab',
     toc: 'Contents', flow: 'Flowchart', sequence: 'Sequence diagram', colon: ': ', sep: ', ',
   },
   ja: {
     theme: 'テーマ', modeLabel: '表示',
     mode: { auto: '自動', light: 'ライト', dark: 'ダーク' },
-    copy: '原稿をコピー', done: 'コピーしました ✓',
+    copy: '原稿をコピー', done: 'コピーしました ✓', open: '新しいタブで開く',
     toc: '目次', flow: 'フローチャート', sequence: 'シーケンス図', colon: '：', sep: '、',
   },
 };
