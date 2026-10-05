@@ -63,10 +63,10 @@ If the context contains the `[answer-me-with-html always-on]` reminder (the user
 The CLI is bundled in this skill's directory: `scripts/am.mjs`, a single file with no dependencies to install; it needs only Node.js 20+. Below, `am` always means:
 
 ```bash
-node "${CLAUDE_SKILL_DIR}/scripts/am.mjs"
+node "<skill-dir>/scripts/am.mjs"
 ```
 
-In Claude Code, the path above is replaced with this skill's directory automatically. If you see the variable unreplaced (other agents), replace it with the absolute path of the directory that contains this SKILL.md. If the user installed the `am` command globally, you can also use `am` directly.
+Replace `<skill-dir>` with the absolute path of the directory containing this SKILL.md (pi reports this path when the skill is loaded). If the user installed the `am` command globally, you can also use `am` directly.
 
 1. First list 3–8 panels in your head. Each panel answers one sub-question only.
    The draft language follows the language of the user's question: an English question gets an English draft, a Chinese question a Chinese draft, a Japanese question a Japanese draft. The page button labels, `<html lang>` and the STE check rules switch automatically by the draft language (a draft containing kana counts as Japanese); STE applies the English or Chinese rules to each sentence by its language (Japanese sentences get only the sentence-length and paragraph-length checks, with the same character limits as Chinese). To force the interface language, write `lang: en`, `lang: zh` or `lang: ja` in the frontmatter.
@@ -74,7 +74,7 @@ In Claude Code, the path above is replaced with this skill's directory automatic
 3. Render in one go with a heredoc:
 
 ````bash
-node "${CLAUDE_SKILL_DIR}/scripts/am.mjs" render - <<'AM_EOF'
+node "<skill-dir>/scripts/am.mjs" render - <<'AM_EOF'
 ---
 title: Title
 ---
@@ -95,7 +95,7 @@ AM_EOF
 When a page already exists and only one panel needs to change, do not rewrite the whole page. Take the source draft from the HTML's `#am-source`, replace only the matching `##` section, and overwrite the page in place:
 
 ````bash
-node "${CLAUDE_SKILL_DIR}/scripts/am.mjs" patch page.html --panel "Panel title" <<'AM_EOF'
+node "<skill-dir>/scripts/am.mjs" patch page.html --panel "Panel title" <<'AM_EOF'
 ## A Panel title
 New content
 AM_EOF
@@ -168,7 +168,7 @@ Use only when the user explicitly asks for a video ("make a video", "explain it 
 A video draft has the same format as a page draft, with one extra rule: lines starting with `>` are narration, one beat per line.
 
 ````bash
-node "${CLAUDE_SKILL_DIR}/scripts/am.mjs" video - --no-open <<'AM_EOF'
+node "<skill-dir>/scripts/am.mjs" video - --no-open <<'AM_EOF'
 ---
 title: The TCP three-way handshake
 subtitle: Why three
